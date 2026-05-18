@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { PencilIcon, Trash2Icon } from 'lucide-react';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export interface DepotRow {
   id: number;
@@ -35,7 +36,7 @@ export function DepotTable({ depots, loading, onEdit, onDelete }: DepotTableProp
           {loading ? (
             <tr>
               <td colSpan={5} className="px-4 py-8 text-center text-sm text-gray-500">
-                Chargement...
+                <LoadingSpinner size={24} />
               </td>
             </tr>
           ) : depots.length === 0 ? (

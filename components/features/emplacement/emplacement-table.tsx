@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Trash2Icon } from 'lucide-react';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export interface EmplacementRow {
   num_emplacement: string;
@@ -41,7 +42,7 @@ export function EmplacementTable({ emplacements, loading, onDelete }: Emplacemen
           {loading ? (
             <tr>
               <td colSpan={9} className="px-3 py-8 text-center text-sm text-gray-500">
-                Chargement...
+                <LoadingSpinner size={24} />
               </td>
             </tr>
           ) : emplacements.length === 0 ? (

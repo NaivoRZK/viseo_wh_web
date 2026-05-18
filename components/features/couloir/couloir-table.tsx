@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { PencilIcon, Trash2Icon } from 'lucide-react';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export interface CouloirRow {
   num_couloir: string;
@@ -33,7 +34,7 @@ export function CouloirTable({ couloirs, loading, onEdit, onDelete }: CouloirTab
           {loading ? (
             <tr>
               <td colSpan={4} className="px-4 py-8 text-center text-sm text-gray-500">
-                Chargement...
+                <LoadingSpinner size={24} />
               </td>
             </tr>
           ) : couloirs.length === 0 ? (

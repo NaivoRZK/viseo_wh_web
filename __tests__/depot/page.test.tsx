@@ -55,7 +55,7 @@ it('redirects to login when hydrated without user', () => {
 it('shows loading state initially', () => {
   mockGetDepots.mockImplementation(() => new Promise(() => {}));
   render(<DepotPage />);
-  expect(screen.getByText('Chargement...')).toBeInTheDocument();
+  expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
 });
 
 it('renders depot list after loading', async () => {

@@ -67,7 +67,7 @@ it('redirects to login when hydrated without user', () => {
 it('shows loading state initially', () => {
   mockGetCouloirs.mockImplementation(() => new Promise(() => {}));
   render(<CouloirPage />);
-  expect(screen.getByText('Chargement...')).toBeInTheDocument();
+  expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
 });
 
 it('renders couloir list after loading', async () => {

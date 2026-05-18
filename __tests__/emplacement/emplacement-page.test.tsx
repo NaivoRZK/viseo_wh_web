@@ -78,7 +78,7 @@ it('redirects to login when hydrated without user', () => {
 it('shows loading state initially', () => {
   mockGetEmplacements.mockImplementation(() => new Promise(() => {}));
   render(<EmplacementPage />);
-  expect(screen.getByText('Chargement...')).toBeInTheDocument();
+  expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
 });
 
 it('renders emplacement list when rack is selected', async () => {

@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { PencilIcon, Trash2Icon } from 'lucide-react';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export interface RackRow {
   num_rack: string;
@@ -50,7 +51,7 @@ export function RackTable({ racks, loading, onEdit, onDelete }: RackTableProps) 
           {loading ? (
             <tr>
               <td colSpan={13} className="px-3 py-8 text-center text-sm text-gray-500">
-                Chargement...
+                <LoadingSpinner size={24} />
               </td>
             </tr>
           ) : racks.length === 0 ? (
