@@ -36,6 +36,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# backend (separate repo)
+/backend/
+
+# misc
+*.tar.gz
+opencode.spec
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
