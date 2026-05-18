@@ -15,8 +15,8 @@ describe('LoginForm', () => {
 
   it('renders email and password fields', () => {
     render(<LoginForm {...mockProps} />);
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText('Email')).toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).toBeInTheDocument();
   });
 
   it('shows validation error for invalid email', async () => {
@@ -29,7 +29,7 @@ describe('LoginForm', () => {
 
   it('shows validation error for empty password', async () => {
     render(<LoginForm {...mockProps} />);
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
+    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'test@example.com' } });
     fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
     await waitFor(() => {
       expect(screen.getByText(/password is required/i)).toBeInTheDocument();
@@ -38,8 +38,8 @@ describe('LoginForm', () => {
 
   it('calls onSubmit with valid data', async () => {
     render(<LoginForm {...mockProps} />);
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
-    fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'password123' } });
+    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'test@example.com' } });
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password123' } });
     fireEvent.click(screen.getByRole('button', { name: /sign in/i }));
     
     await waitFor(() => {

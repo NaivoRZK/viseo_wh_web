@@ -59,13 +59,10 @@ export async function logout(): Promise<void> {
   });
 }
 
-export async function refreshToken(refreshToken: string): Promise<{ access_token: string }> {
+export async function refreshToken(): Promise<void> {
   const response = await fetch(`${API_BASE}/refresh`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ refresh_token: refreshToken }),
     credentials: 'include',
   });
   if (!response.ok) throw new Error('Refresh failed');
-  return response.json();
 }

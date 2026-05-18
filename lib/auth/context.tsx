@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User, AuthResponse } from './types';
-import { loginWithEmail, loginWithPin, getMe, logout as apiLogout } from './api';
+import { loginWithEmail, loginWithPin, getMe, refreshToken as refreshTokenApi, logout as apiLogout } from './api';
 
 interface AuthContextType {
   user: User | null;
@@ -30,14 +30,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     getMe()
       .then((data) => {
         setUser(data.user);
-        setAccessToken(null);
-        setRefreshToken(null);
       })
-      .catch(() => {
-        setUser(null);
-        setAccessToken(null);
-        setRefreshToken(null);
-      })
+      .catch(() =>
+        refreshTokenApi()
+          .then(() => getMe())
+          .then((data) => {
+            setUser(data.user);
+          })
+          .catch(() => {
+            setUser(null);
+          })
+      )
       .finally(() => {
         setHydrated(true);
       });

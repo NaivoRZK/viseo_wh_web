@@ -8,18 +8,18 @@ describe('Auth API', () => {
   });
 
   it('loginWithEmail returns data on success', async () => {
-    const mockResponse = {
-      access_token: 'access123',
-      refresh_token: 'refresh123',
-      user: { id: 1, login: 'test@test.com', name: 'Test', email: 'test@test.com' },
-    };
+    const apiResponse = { id: 1, login: 'test@test.com', email: 'test@test.com' };
     (fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve(mockResponse),
+      json: () => Promise.resolve(apiResponse),
     });
 
     const result = await loginWithEmail({ login: 'test@test.com', password: 'pass' });
-    expect(result).toEqual(mockResponse);
+    expect(result).toEqual({
+      access_token: '',
+      refresh_token: '',
+      user: { id: 1, login: 'test@test.com', name: 'test@test.com', email: 'test@test.com' },
+    });
     expect(fetch).toHaveBeenCalledWith('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -37,18 +37,18 @@ describe('Auth API', () => {
   });
 
   it('loginWithPin returns data on success', async () => {
-    const mockResponse = {
-      access_token: 'access456',
-      refresh_token: 'refresh456',
-      user: { id: 2, login: 'user', name: 'User', email: 'user@test.com' },
-    };
+    const apiResponse = { id: 2, login: 'user', email: 'user@test.com' };
     (fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve(mockResponse),
+      json: () => Promise.resolve(apiResponse),
     });
 
     const result = await loginWithPin({ pin: '1234' });
-    expect(result).toEqual(mockResponse);
+    expect(result).toEqual({
+      access_token: '',
+      refresh_token: '',
+      user: { id: 2, login: 'user', name: 'user', email: 'user@test.com' },
+    });
   });
 
   it('logout calls logout endpoint', async () => {
