@@ -39,7 +39,7 @@ export default function EmplacementPage() {
   const [selectedCouloirId, setSelectedCouloirId] = useState<string>('');
   const [selectedRack, setSelectedRack] = useState<string>('');
   const [emplacements, setEmplacements] = useState<EmplacementRow[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [fetchKey, setFetchKey] = useState(0);
