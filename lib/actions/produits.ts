@@ -1,5 +1,7 @@
 'use server';
-import { authFetch, API_BASE } from '@/lib/actions/api';
+import { authFetch } from '@/lib/actions/api';
+
+const API_BASE = 'http://127.0.0.1:5000';
 
 export async function assignBarcodeAction(ref: string, barcode: string) {
   if (!ref || !barcode) {
