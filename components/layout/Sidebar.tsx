@@ -15,9 +15,8 @@ const subMenuItems = [
 export default function Sidebar() {
   const pathname = usePathname();
   const { logout, loading } = useAuth();
-  const [isOpen, setIsOpen] = useState(true);
-
-  const isInEmplacements = pathname.startsWith('/emplacements');
+  const [isEmplacementOpen, setIsEmplacementOpen] = useState(true);
+  const [isBarcodeOpen, setIsBarcodeOpen] = useState(true);
 
   return (
     <aside className="fixed top-0 left-0 h-screen w-64 bg-white border-r border-gray-200 flex flex-col z-40">
@@ -27,12 +26,12 @@ export default function Sidebar() {
 
       <nav className="flex-1 px-3 py-4 overflow-y-auto">
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsEmplacementOpen(!isEmplacementOpen)}
           className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-400 hover:text-gray-600 transition-colors"
         >
           <span>Création emplacements</span>
           <svg
-            className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-90' : ''}`}
+            className={`w-4 h-4 transition-transform ${isEmplacementOpen ? 'rotate-90' : ''}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -41,7 +40,7 @@ export default function Sidebar() {
           </svg>
         </button>
 
-        {isOpen && (
+        {isEmplacementOpen && (
           <ul className="mt-1 space-y-0.5">
             {subMenuItems.map((item) => {
               const isActive = pathname === item.href;
@@ -62,6 +61,40 @@ export default function Sidebar() {
             })}
           </ul>
         )}
+
+        <div className="mt-4">
+          <button
+            onClick={() => setIsBarcodeOpen(!isBarcodeOpen)}
+            className="flex items-center justify-between w-full px-3 py-2 text-xs font-semibold uppercase tracking-wider text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <span>Gestion code barre</span>
+            <svg
+              className={`w-4 h-4 transition-transform ${isBarcodeOpen ? 'rotate-90' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {isBarcodeOpen && (
+            <ul className="mt-1 space-y-0.5">
+              <li>
+                <Link
+                  href="/produits/barcode"
+                  className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    pathname === '/produits/barcode'
+                      ? 'bg-blue-50 text-blue-700'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  Liaison article à un code barre
+                </Link>
+              </li>
+            </ul>
+          )}
+        </div>
       </nav>
 
       <div className="px-3 pb-4">
